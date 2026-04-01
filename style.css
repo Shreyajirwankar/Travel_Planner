@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Travel Planner ✈</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="bg-layer"></div>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <span class="header-plane">✈</span>
+    <h1>AI Travel Planner</h1>
+    <p>Your intelligent travel companion — powered by Groq AI (Free ⚡)</p>
+    <div class="header-line"></div>
+  </div>
+
+  <!-- GROQ API KEY SETUP -->
+  <div class="api-notice card-anim-1">
+    <strong>🔑 Groq API Key Required — 100% Free</strong><br/>
+    Get your free API key from
+    <a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a>
+    — no credit card needed. Paste it below and click Save.
+    <div class="api-key-row">
+      <input type="password" id="apiKeyInput" placeholder="gsk_xxxxxxxxxxxxxxxxxxxx" />
+      <button class="save-key-btn" onclick="saveKey()">Save Key</button>
+    </div>
+    <div class="key-status missing" id="keyStatus">No Groq API key saved yet.</div>
+  </div>
+
+  <!-- FORM -->
+  <div class="card card-anim-1">
+    <div class="form-grid">
+
+      <div class="field field-full">
+        <label>Destination</label>
+        <div class="input-wrap">
+          <input type="text" id="dest" placeholder="e.g. Tokyo, Japan" />
+          <span class="input-icon">🌍</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Duration (days)</label>
+        <input type="number" id="days" value="5" min="1" max="30" />
+      </div>
+
+      <div class="field">
+        <label>Travelers</label>
+        <input type="number" id="travelers" value="1" min="1" max="20" />
+      </div>
+
+      <div class="field">
+        <label>Budget Level</label>
+        <select id="budget">
+          <option value="budget">💰 Budget / Backpacker</option>
+          <option value="mid-range" selected>💳 Mid-Range</option>
+          <option value="luxury">💎 Luxury</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Travel Style</label>
+        <select id="style">
+          <option value="cultural">🏛 Cultural &amp; Historical</option>
+          <option value="adventure">🧗 Adventure &amp; Outdoor</option>
+          <option value="relaxed">🌊 Relaxed &amp; Beach</option>
+          <option value="family">👨‍👩‍👧 Family Friendly</option>
+          <option value="romantic">💑 Romantic Getaway</option>
+          <option value="foodie">🍜 Foodie &amp; Culinary</option>
+          <option value="nightlife">🎉 Nightlife &amp; Entertainment</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- Quick Chips -->
+    <div class="chips-row">
+      <span class="chips-label">Quick picks:</span>
+      <span class="chip" onclick="setDest('Paris, France')">🗼 Paris</span>
+      <span class="chip" onclick="setDest('Bali, Indonesia')">🌴 Bali</span>
+      <span class="chip" onclick="setDest('Tokyo, Japan')">🗾 Tokyo</span>
+      <span class="chip" onclick="setDest('New York, USA')">🗽 New York</span>
+      <span class="chip" onclick="setDest('Santorini, Greece')">⛵ Santorini</span>
+      <span class="chip" onclick="setDest('Dubai, UAE')">🏙 Dubai</span>
+      <span class="chip" onclick="setDest('Rome, Italy')">🏛 Rome</span>
+      <span class="chip" onclick="setDest('Bangkok, Thailand')">🛺 Bangkok</span>
+      <span class="chip" onclick="setDest('Maldives')">🐠 Maldives</span>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs card-anim-2">
+    <button class="tab-btn active" onclick="setTab('itinerary', this)">📅 Itinerary</button>
+    <button class="tab-btn" onclick="setTab('packing', this)">🎒 Packing List</button>
+    <button class="tab-btn" onclick="setTab('tips', this)">💡 Local Tips</button>
+    <button class="tab-btn" onclick="setTab('budget', this)">💰 Budget</button>
+  </div>
+
+  <!-- GENERATE BUTTON -->
+  <button class="gen-btn card-anim-2" id="genBtn" onclick="generate()">
+    ✨ Generate Travel Plan
+  </button>
+
+  <!-- OUTPUT -->
+  <div class="card card-anim-3" id="outputCard">
+    <div class="output-header">
+      <span class="output-title" id="outputTitle">Your Travel Plan</span>
+      <div class="output-actions">
+        <button class="action-btn" id="copyBtn" onclick="copyPlan()" style="display:none">📋 Copy</button>
+        <button class="action-btn" id="saveBtn" onclick="savePlan()" style="display:none">💾 Save</button>
+        <button class="action-btn" id="clearBtn" onclick="clearPlan()" style="display:none">✕ Clear</button>
+      </div>
+    </div>
+    <div id="output">
+      <div class="placeholder">✈ Enter a destination above and click Generate to create your travel plan</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer card-anim-4">
+    Powered by Groq API &nbsp;⚡&nbsp; llama3-70b-8192 &nbsp;•&nbsp; 100% Free
+  </div>
+
+</div>
+
+<script src="js/prompts.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
